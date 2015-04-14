@@ -1,0 +1,59 @@
+unit SearchUser;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Buttons, SPEditor_TLB;
+
+type
+  TSearchUserForm = class(TForm)
+    Label1: TLabel;
+    Edit1: TEdit;
+    SpeedButton1: TSpeedButton;
+    ListBox1: TListBox;
+    btnCancel: TButton;
+    btnSave: TButton;
+    procedure btnCancelClick(Sender: TObject);
+    procedure btnSaveClick(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+  private
+    { Private declarations }
+    FCount: integer;
+    FSPEditor: TSPEditorCtrl;
+  public
+    { Public declarations }
+    property SPEditorCtrl: TSPEditorCtrl read FSPEditor write FSPEditor;
+  end;
+
+var
+  SearchUserForm: TSearchUserForm;
+
+implementation
+
+{$R *.dfm}
+
+procedure TSearchUserForm.btnCancelClick(Sender: TObject);
+begin
+  Close;
+end;
+
+procedure TSearchUserForm.btnSaveClick(Sender: TObject);
+begin
+  Close;
+end;
+
+procedure TSearchUserForm.SpeedButton1Click(Sender: TObject);
+var i: integer;
+begin
+   Screen.Cursor := crHourglass;
+   FCount := FSPEditor.GetUserList(Edit1.Text);
+   ListBox1.Clear;
+   for i := 0 to FCount-1 do
+   begin
+    ListBox1.Items.AddObject(FSPEditor.GetUserName(i), TObject(FSPEditor.GetUserId(i)));
+   end;
+   Screen.Cursor := crDefault;
+end;
+
+end.

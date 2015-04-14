@@ -1,0 +1,3 @@
+#define RT_MANIFEST 24
+1 RT_MANIFEST SPEditor.manifest
+101 BITMAP SPEditor.bmp
